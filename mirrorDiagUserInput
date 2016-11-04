@@ -1,0 +1,90 @@
+
+def takeInputs():
+  pic=makePicture(pickAFile())
+  W=getWidth(pic)
+  H=getHeight(pic)
+	
+  # one way is to ask first which border they will use.
+  border1 = 0
+  while(border1<1 or border1>4):
+    border1 = requestInteger("For Point 1 choose 1 for top border, 2 for left border, 3 for right broder or 4 for bottom border. ")
+    #choose 1st piont coordinates
+    if border1==1:
+      x1=requestInteger("Enter x1 (y1=0) ")
+      while(x1<0 or x1>W):
+        x1=requestInteger("Error! Enter x1 (y1=0) ")
+      y1=0
+    elif border1==2:
+      x1=0
+      y1= requestInteger("Enter y1 (x1=0) ")
+      while(y1<0 or y1>H):
+        y1=requestInteger("Error! Enter y1 (x1=0) ")
+    elif border1==3:
+      x1=(W-1)
+      y1= requestInteger("Enter y1 (x1="+str(x1)+") ")
+      while(y1<0 or y1>H):
+        y1=requestInteger("Error! Enter y1 (x1="+str(x1)+") ")	
+    else: 
+      y1=(H-1)
+      x1= requestInteger("Enter y1 (y1="+str(y1)+") ")
+      while(x1<0 or x1>W):
+        x1=requestInteger("Error! Enter x1 (y1="+str(y1)+") ")
+
+    print x1, y1
+    
+ 
+  
+  #choose second point coordinates
+  border2 = 0
+  while(border2<1 or border2>4):
+    border2 = requestInteger("For Point 2 choose 1 for top border, 2 for left border, 3 for right broder or 4 for bottom border. ")
+    #choose 1st piont coordinates
+    if border2==1:
+      x2=requestInteger("Enter x1 (y1=0) ")
+      while(x2<0 or x2>W):
+        x2=requestInteger("Error! Enter x2 (y2=0) ")
+      y2=0
+    elif border2==2:
+      x2=0
+      y2= requestInteger("Enter y2 (x2=0) ")
+      while(y2<0 or y2>H):
+        y2=requestInteger("Error! Enter y2 (x2=0) ")
+    elif border2==3:
+      x2=(W-1)
+      y2= requestInteger("Enter y2 (x2="+str(x2)+") ")
+      while(y2<0 or y2>H):
+        y2=requestInteger("Error! Enter y2 (x2="+str(x2)+") ")	
+    else: 
+      y2=(H-1)
+      x2= requestInteger("Enter y2 (y2="+str(y2)+") ")
+      while(x1<0 or x1>W):
+        x2=requestInteger("Error! Enter x2 (y2="+str(y2)+") ")
+
+    print x2, y2
+    
+    
+def test():
+  pic=makePicture(pickAFile())
+  rotateByAngle(pic,30)
+  
+def rotateByAngle(pic,angle):
+  w=getWidth(pic)
+  h=getHeight(pic)
+  pic2=makeEmptyPicture(w,h)
+  repaint(pic2)
+  xCenter=w/2
+  yCenter=h/2
+  rad=angle*pi/180
+  
+  for x1 in range(0,w):
+    for y1 in range(0,h):
+      px1=getPixel(pic,x1,y1)
+      x2=cos(angle)*(x1-xCenter)-sin(angle)*(y1-yCenter)+xCenter
+      y2=sin(angle)*(x1-xCenter)+cos(angle)*(y1-yCenter)+yCenter
+      if x2>=0 and x2<w and y2>=0 and y2<h:
+        px2=getPixel(pic2,int(x2),int(y2))
+        setColor(px2,getColor(px1))
+  repaint(pic2)
+    
+  
+    
