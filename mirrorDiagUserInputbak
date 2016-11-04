@@ -86,5 +86,5 @@ def rotateByAngle(pic,angle):
         setColor(px2,getColor(px1))
   repaint(pic2)
     
-  
+  #hello
     
